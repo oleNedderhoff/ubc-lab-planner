@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  password String
+  isActive IsActive  @default(INACTIVE)
+  role     Role      @default(USER)
+  projects Project[]
+}
+
+model Analyzer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  client    Client   @relation(references: [id], fields: [clientId])
+  width     Float
+  height    Float
+  depth     Float
+  weight    Float?
+  waermelast Float?
+  maxLeistungsaufnahme  Float?
+  avgLeistungsaufnahme  Float?
+  avgWasserverbrauch  Float?
+  druckluft Float?
+  wasserqualitaet  Float?
+  sound     Float?
+  clientId  Int
+  zaehler   Int     @default(0)
+  countAnalyzer  countAnalyzer[]
+  color     String
+}
+
+enum IsActive {
+  ACTIVE
+  INACTIVE
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Client {
+  id        Int        @id @default(autoincrement())
+  name      String
+  imgUrl    String
+  analyzers Analyzer[]
+}
+
+model Project {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  user      User       @relation(references: [id], fields: [userId])
+  userId    Int
+  countAnalyzer countAnalyzer[]
+}
+
+model countAnalyzer {
+  id        Int        @id @default(autoincrement())
+  count     Int
+  analyzer  Analyzer  @relation(references: [id], fields: [analyzerId])
+  analyzerId Int
+  project   Project   @relation(references: [id], fields: [projectId])
+  projectId Int
+}
+
+
