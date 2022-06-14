@@ -22,6 +22,7 @@ import {
   MenuList,
   Image,
 } from "@chakra-ui/react";
+import { StarIcon } from '@chakra-ui/icons'
 import {
   FiHome,
   FiTrendingUp,
@@ -91,45 +92,14 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NextLink passHref href={link.href} key={link.name}>
-          <NavItem icon={link.icon}>{link.name}</NavItem>
-        </NextLink>
+        <><Link href={link.href}>
+          {link.name} <StarIcon mx='2px' />
+        </Link><br /></>
       ))}
     </Box>
   );
 };
 
-const NavItem = React.forwardRef(({ icon, children, ...rest }, ref) => {
-  return (
-    <Link style={{ textDecoration: "none" }} _focus={{ boxShadow: "none" }}>
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: "cyan.400",
-          color: "white",
-        }}
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
-    </Link>
-  );
-});
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const { data: session, status } = useSession();
