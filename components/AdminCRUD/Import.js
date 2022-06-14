@@ -133,7 +133,7 @@ export default function Import({ isOpen, onClose, model, router, delEntry }) {
               {...getRootProps({ isFocused, isDragAccept, isDragReject })}
             >
               <input {...getInputProps()} />
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <p>Drag and drop some files here, or click to select files</p>
             </Container>
             <p>
               Data found

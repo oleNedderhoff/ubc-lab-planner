@@ -95,7 +95,7 @@ export default function ProjectDetail({ project, analyzerTotal, projectId, proje
     },
     {
       name: "Anzahl",
-      cell: (e) => {
+      Cell: (e) => {
         const {
           register,
           control,
@@ -139,7 +139,7 @@ export default function ProjectDetail({ project, analyzerTotal, projectId, proje
     {
       name: "Model",
       width: "350px",
-      cell: (e) => {
+      Cell: (e) => {
         console.log(e.id);
         refs[e.analyzerId] = (useRef());
         console.log(refs)
