@@ -56,7 +56,7 @@ export default function Edit({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await prisma.client.findMany();
 
   return {

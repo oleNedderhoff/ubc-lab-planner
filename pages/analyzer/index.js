@@ -127,7 +127,7 @@ export default function Analyzer({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await prisma.analyzer.findMany({
     select: {
       id: true,

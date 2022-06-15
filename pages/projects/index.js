@@ -60,7 +60,7 @@ export default function Project({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await prisma.project.findMany({
     orderBy:{
       id: 'asc'
